@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<title>A Small Surprise ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:Poppins;
+background:#eee9ea;
+text-align:center;
+}
+
+/* PAGES */
+
+.page{
+display:none;
+min-height:100vh;
+padding:60px 20px;
+}
+
+.active{
+display:block;
+}
+
+/* TITLE */
+
+h1{
+font-family:"Indie Flower";
+font-size:42px;
+color:#2a8796;
+}
+
+/* BUTTON */
+
+button{
+padding:12px 25px;
+font-size:16px;
+border:none;
+border-radius:25px;
+background:#2a8796;
+color:white;
+cursor:pointer;
+margin-top:25px;
+}
+
+button:hover{
+background:#5f22c2;
+}
+
+/* VIDEO SIZE */
+
+.small-video{
+width:250px;
+border-radius:10px;
+margin-top:20px;
+}
+
+video{
+width:70%;
+max-width:250px;
+border-radius:10px;
+margin-top:20px;
+}
+
+/* LETTER */
+
+.letter{
+max-width:700px;
+margin:auto;
+text-align:left;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+line-height:1.7;
+}
+
+/* FINAL PAGE */
+
+.dark{
+background:#1b1d1f;
+color:white;
+}
+
+/* CHOCOLATE RAIN */
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+
+<section class="page">
+<h1>Hey Handsome Hulk 👽💪</h1>
+<p>Someone made something for you...</p>
+<p>Click next if you're ready.</p>
+
+<button onclick="nextPage()">Next</button>
+</section>
+
+
+<!-- PAGE 2 -->
+
+<section class="page">
+<h1>🎥 Just Watch This</h1>
+
+<video class="small-video" controls>
+<source src="video1.mp4" type="video/mp4">
+</video>
+
+<br>
+<button onclick="nextPage()">Next</button>
+
+</section>
+
+
+<!-- PAGE 3 -->
+
+<section class="page">
+<h1>🎬 Gift number-1</h1>
+
+<video controls>
+<source src="video2.mp4" type="video/mp4">
+</video>
+
+<br>
+<button onclick="nextPage()">Next</button>
+
+</section>
+
+
+<!-- PAGE 4 -->
+
+<section class="page">
+<h1>🎬 Gift number-2</h1>
+<h3>⚠ WARNING: Watch this at your own risk</h3>
+
+<video controls>
+<source src="video3.mp4" type="video/mp4">
+</video>
+
+<br>
+<button onclick="nextPage()">Next</button>
+
+</section>
+
+
+<!-- PAGE 5 -->
+
+<section class="page">
+<h1>🎬 Gift number-3</h1>
+
+<video controls>
+<source src="video4.mp4" type="video/mp4">
+</video>
+
+<br>
+<button onclick="nextPage()">One more thing</button>
+
+</section>
+
+
+<!-- PAGE 6 -->
+
+<section class="page">
+
+<h1>💌 A Letter for You</h1>
+
+<div class="letter">
+
+<p>
+
+Dear Handsome Hulk (my calm alien uncle 👽💪),<br><br>
+
+Happy Birthday to the strongest, calmest, and most incredible person I know.
+I don’t even know where to start, because you’ve been so much more than just my brother 
+you’ve been my friend and one of the safest, most important people in my life.<br><br>
+
+Every weekend call with you brightens my week.
+Even when things are stressful, your presence, your advice, and your laughter make everything feel lighter.
+I honestly can’t imagine my life without those moments.<br><br>
+
+You made my childhood so special, safe, and full of joy.
+The memories we share  the jokes, the advice, the quiet moments 
+all of it is priceless to me.<br><br>
+
+I want to go on long drives with you and travel the world with you someday.
+And if there is another life, I would choose to be your sister again without a second thought.<br><br>
+
+Thank you for being my calm Handsome Hulk,
+my alien uncle, my guide, and my brother.<br><br>
+
+You are the best brother anyone could ever wish for.<br><br>
+
+P.S. I still haven’t seen the angry version of the Handsome Hulk 😏💪  
+One day… just once… I hope I do 😂.<br><br>
+
+Happy Birthday.<br><br>
+
+With all my love,<br>
+<strong>Your Mahathi❤️</strong>
+
+</p>
+
+</div>
+
+<button onclick="nextPage()">One last thing ↓</button>
+
+</section>
+
+
+<!-- PAGE 7 -->
+
+<section class="page dark">
+
+<h1>🎉 Happy Birthday Vikas ANNA 🎉</h1>
+
+<h2>Waiting for your birthday party...</h2>
+
+<p>
+From <strong>YOUR FAV 😙</strong><br>
+To <strong>My FOREVER Alien👽</strong>
+</p>
+
+<canvas id="confetti"></canvas>
+
+</section>
+
+
+
+<script>
+
+let current=0;
+const pages=document.querySelectorAll(".page");
+
+pages[0].classList.add("active");
+
+function nextPage(){
+
+pages[current].classList.remove("active");
+
+current++;
+
+if(current<pages.length){
+
+pages[current].classList.add("active");
+
+if(current===pages.length-1){
+startChocolateRain();
+}
+
+}
+
+}
+
+
+
+function startChocolateRain(){
+
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let chocolates=[];
+
+for(let i=0;i<80;i++){
+chocolates.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:30+Math.random()*20,
+speed:2+Math.random()*2
+});
+}
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+for(let i=0;i<chocolates.length;i++){
+
+let c=chocolates[i];
+
+ctx.font=c.size+"px serif";
+ctx.fillText("",c.x,c.y);
+
+c.y+=c.speed;
+
+if(c.y>canvas.height){
+c.y=-20;
+c.x=Math.random()*canvas.width;
+}
+
+}
+
+requestAnimationFrame(draw);
+
+}
+
+draw();
+
+}
+
+</script>
+
+</body>
+</html>
